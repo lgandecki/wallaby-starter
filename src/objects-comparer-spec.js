@@ -102,7 +102,7 @@ describe('objectsComparer', function () {
       const _first = {myArray: [{abc: "def"}, {agh: "sdf"}, {wrong: "wrong"}]};
       const _second = {myArray: [{abc: "def"}, {agh: "sdf"}] };
 
-      expect (compareObjects(_first, _second)).toEqual([`object2 doesn't contain {"wrong":"wrong"}`]);
+      expect (compareObjects(_first, _second)).toEqual([`object2 doesn't contain {"wrong":"wrong"} at path myArray`]);
     });
     // it('if second of the arrays is longer', function() {
     //   const _first = {myArray: [{abc: "def"}, {agh: "sdf"}]};
@@ -114,7 +114,7 @@ describe('objectsComparer', function () {
       const _first = {myArray: [{abc: "def"}, {agh: "sdf"}, {differentOne: "other"}]};
       const _second = {myArray: [{abc: "def"}, {agh: "sdf"}, {wrong: "wrong"}] };
 
-      expect(compareObjects(_first, _second)).toEqual([`object2 doesn't contain {"differentOne":"other"}`, `object2 doesn't contain {"wrong":"wrong"}`]);
+      expect(compareObjects(_first, _second)).toEqual([`object2 doesn't contain {"differentOne":"other"} at path myArray`, `object2 doesn't contain {"wrong":"wrong"} at path myArray`]);
     });
   });
   it('should return [] if objects contain nested arrays and objects', function () {
@@ -146,9 +146,9 @@ describe('objectsComparer', function () {
         {
           "name": "Sunday",
           "closedIndicator": "Y",
-          // "hours": [
-          //   {}
-          // ]
+          "hours": [
+            {}
+          ]
         },
         {
           "name": "Saturday",
@@ -198,9 +198,9 @@ describe('objectsComparer', function () {
         {
           "name": "Sunday",
           "closedIndicator": "Y",
-          // "hours": [
-          //   {}
-          // ]
+          "hours": [
+            {}
+          ]
         },
         {
           "name": "Tuesday",
@@ -264,13 +264,11 @@ describe('objectsComparer', function () {
         }
       ]
     };
-    console.log('compareObjects(object1, object2)', compareObjects(object1, object2));
+    
     expect(compareObjects(object1, object2)).toEqual([]);
   });
-  it.only('should work with real objects', function () {
-    console.log('compareObjects', compareObjects(responseFromAll, responseFromDealerCode));
-    
-    expect(true).toBe(false);
+  it('should work with real objects', function () {
+    expect(compareObjects(responseFromAll, responseFromDealerCode)).toEqual([]);
   });
 });
 
@@ -291,7 +289,7 @@ describe('getArrayPaths', function () {
         ]
       };
       const actualPaths = ['departments', 'departments.0.phones'];
-      const receivedPaths = getArrayPaths(nestedArrays);
+      const receivedPaths = getArrayPaths(nestedArrays, '');
       expect(receivedPaths).toEqual(actualPaths);
     });
     it('should return correct paths to arrays with array nested in object', function () {
@@ -372,9 +370,9 @@ let nestedArrays1 = { //response from all
         {
           "name": "Sunday",
           "closedIndicator": "Y",
-          // "hours": [
-          //   {}
-          // ]
+          "hours": [
+            {}
+          ]
         },
         {
           "name": "Saturday",
@@ -439,9 +437,9 @@ let nestedArrays2 = {
         {
           "name": "Sunday",
           "closedIndicator": "Y",
-          // "hours": [
-          //   {}
-          // ]
+          "hours": [
+            {}
+          ]
         },
         {
           "name": "Tuesday",
@@ -789,9 +787,9 @@ const responseFromDealerCode = {
         {
           "name": "Sunday",
           "closedIndicator": "Y",
-          // "hours": [
-          //   {}
-          // ]
+          "hours": [
+            {}
+          ]
         },
         {
           "name": "Tuesday",
@@ -890,9 +888,9 @@ const responseFromDealerCode = {
         {
           "name": "Sunday",
           "closedIndicator": "Y",
-          // "hours": [
-          //   {}
-          // ]
+          "hours": [
+            {}
+          ]
         },
         {
           "name": "Saturday",
@@ -1193,7 +1191,7 @@ const responseFromDealerCode = {
   "city": "Hyannis",
   "state": "MA",
   "regionCode": "NER",
-  "url": "wwww.tracyvw.com"
+  "url": "www.tracyvw.com"
 };
 
 const responseFromAll = {
@@ -1310,9 +1308,9 @@ const responseFromAll = {
         {
           "name": "Sunday",
           "closedIndicator": "Y",
-          // "hours": [
-          //   {}
-          // ]
+          "hours": [
+            {}
+          ]
         },
         {
           "name": "Saturday",
@@ -1459,9 +1457,9 @@ const responseFromAll = {
         {
           "name": "Sunday",
           "closedIndicator": "Y",
-          // "hours": [
-          //   {}
-          // ]
+          "hours": [
+            {}
+          ]
         },
         {
           "name": "Monday",
