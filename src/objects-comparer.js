@@ -65,7 +65,7 @@ function getParentKey(parentKey, key) {
 }
 
 export function getQueryFromPrimitiveValuesFor(object) {
-  query = {};
+  const query = {};
   _.each(object, (value, key) => {
     if (isPrimitive(value)) {
       query[key] = value;

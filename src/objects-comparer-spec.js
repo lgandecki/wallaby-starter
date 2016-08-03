@@ -20,6 +20,7 @@ describe('objectsComparer', function () {
 
       expect(compareResult).toEqual([]);
     });
+    
     it('if they contain exact arrays', function () {
       let simpleObj1 = {
         items: [10, 'a', '']
@@ -104,12 +105,35 @@ describe('objectsComparer', function () {
 
       expect (compareObjects(_first, _second)).toEqual([`object2 doesn't contain {"wrong":"wrong"} at path myArray`]);
     });
-    // it('if second of the arrays is longer', function() {
-    //   const _first = {myArray: [{abc: "def"}, {agh: "sdf"}]};
-    //   const _second = {myArray: [{abc: "def"}, {agh: "sdf"}, {wrong: "wrong"}]};
-    //
-    //   expect (compareObjects(_first, _second)).toEqual([{doesNot: "Match"}]);
-    // });
+    it('if one object is missing a key', function () {
+      let simpleObj1 = {
+        number: 10,
+        letter: 'a',
+        test: '',
+        missingKey: ''
+      };
+      let simpleObj2 = {
+        number: 10,
+        letter: 'a',
+        test: '',
+      };
+
+      const compareResult = objectsComparer(simpleObj1, simpleObj2);
+
+      expect(compareResult).toEqual([`object2 doesn't contain missingKey`]);
+    });
+    it('if objects have different primitive values for the same key', function () {
+      let simpleObj1 = {
+        number: 10,
+      };
+      let simpleObj2 = {
+        number: 11,
+      };
+
+      const compareResult = objectsComparer(simpleObj1, simpleObj2);
+
+      expect(compareResult).toEqual([`object1 value: ${simpleObj1.number} is different from object2 value: ${simpleObj2.number} at path number`]);
+    });
     it('if an array has one of the objects different', function() {
       const _first = {myArray: [{abc: "def"}, {agh: "sdf"}, {differentOne: "other"}]};
       const _second = {myArray: [{abc: "def"}, {agh: "sdf"}, {wrong: "wrong"}] };
