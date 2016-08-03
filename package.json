@@ -1,0 +1,25 @@
+{
+  "name": "wallaby-starter",
+  "version": "0.0.1",
+  "description": "Start writing unit tests that run immediately right away",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lgandecki/wallaby-starter.git"
+  },
+  "author": "Lukasz Gandecki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lgandecki/wallaby-starter/issues"
+  },
+  "homepage": "https://github.com/lgandecki/wallaby-starter#readme",
+  "dependencies": {
+    "babel": "^4.3.0",
+    "expect": "^1.20.2",
+    "mocha": "^3.0.0",
+    "test-runner-config": "^0.5.0"
+  }
+}
